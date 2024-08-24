@@ -1,0 +1,88 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+
+
+.btn-custom-2019 {
+    background-color: #007bff;
+    /* Blue */
+    color: #ffffff;
+}
+
+.btn-custom-2021 {
+    background-color: #ffc107;
+    /* Yellow */
+    color: #000000;
+}
+
+.btn-custom-both {
+    background: linear-gradient(to right, #007bff, #ffc107);
+    /* Blue to Yellow Gradient */
+    color: #ffffff;
+}
+
+.btn-custom-active {
+    border: 2px solid #000;
+}
+
+.header-bio {
+    font-size: 1rem; /* Adjust font size for different screen sizes */
+}
+
+@media (max-width: 576px) {
+    .header-bio {
+        text-align: center;
+        font-size: 0.875rem; /* Smaller font size on very small screens */
+    }
+
+    .text-center {
+        text-align: center; /* Ensure text is centered */
+    }
+}
+
+.exercise-card {
+    /* Standardize the card size */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.exercise-card img {
+    max-height: 200px;
+    /* Adjust height as needed */
+    object-fit: cover;
+}
+
+.exercise-card .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-link {
+    margin-top: auto;
+    /* Push the link to the bottom */
+}
+
+.active {
+    background-color: #007bff !important;
+    color: white !important;
+}

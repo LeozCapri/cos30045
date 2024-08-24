@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data Visualisation Exercise 1"/>
+    <meta name="keywords" content="HTML, CSS"/>
+    <meta name="author" content="Mohamed Zaeem Bin Suzaizi"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+    <title>COS30045 Task 1.3 Drawing SVGs </title>
+</head>
+
+<body>
+    <header class="text-center my-4">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <!-- Column for Logo -->
+                <div class="col-auto">
+                    <img
+                        src="../initial-logo.png"
+                        alt="Logo"
+                        class="img-fluid"
+                        style="max-width: 100px;"
+                    />
+                </div>
+                <!-- Column for Name and Email -->
+                <div class="col-auto">
+                    <p class="mb-0 header-bio">
+                        <b>MOHAMED ZAEEM BIN SUZAIZI</b>
+                        <br />
+                        INTI: J24042991@student.newinti.edu.my
+                        <br />
+                        SUT: 105095593@student.swin.edu.au
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Navigation Buttons -->
+            <div class="mt-4">
+                <a href="../index.html" class="btn btn-outline-primary mx-2">Home</a>
+                <a href="../zaeem-lab1/lab1-1.html" class="btn btn-outline-secondary mx-2">Lab 1-1</a>
+                <a href="../zaeem-lab1/lab1-2.html" class="btn btn-outline-secondary mx-2">Lab 1-2</a>
+                <a href="../zaeem-lab1/lab1-3.html" class="btn btn-outline-secondary mx-2">Lab 1-3</a>
+                <!-- Add more buttons as needed for other labs -->
+            </div>
+        </div>
+    </header>
+    <div class="container my-5">
+        <div class="card mx-auto" style="max-width: 800px;">
+            <div class="card-header">
+                <h1 class="card-title">Drawing Shapes with SVG</h1>
+                <svg width="500" height="58" style="background-color: slategrey;">
+                    <g transform="translate(20,4)">
+                        <!-- transform="translate(20,0)" -->
+                        <circle cx="25", cy="25", r="25" fill="cornflowerblue"/>
+                        <rect x="50", y="0", width="50", height="50" fill="rgb(100,149,237)"/>
+                        <ellipse cx="140" cy="25" rx="40" ry="25" fill="rgba(100,149,237,0.5)"/>
+                        <line x1="0" y1="30" x2="180" y2="30" stroke="black" stroke-width="5"/>
+                    </g>
+                </svg>
+            </div>
+            
+            <div class="card-header">
+                <h1 class="card-title">Pet ownership during the COVID pandemic has increased</h1>
+                <h4 class="card-subtitle mb-2 text-muted">Mohamed Zaeem Bin Suzaizi</h2>
+            </div>
+            <div class="card-body">
+                <p class="card-text text-justify">
+                    A report from <b>Animal Medicines Australia (AMA)</b> has found that many Australians took the opportunity to introduce a pet into their household during the pandemic. Their survey indicated that there was a significant increase in the percent of households taking in a new dog, fish, or bird. Their research also indicated that pets had a number of positive influences on their lives such as:
+                </p>
+                <ul class="list-unstyled">
+                    <li>&#8226; Companionship</li>
+                    <li>&#8226; Better mental health</li>
+                    <li>&#8226; Joy and happiness</li>
+                </ul>
+                <section class="text-center mb-4">
+                    <div class="btn-group" role="group" aria-label="Chart selection">
+                        <button id="btn2019" class="btn btn-primary btn-custom-2019" onclick="show('pets-ownership-2019.png', 'Fig 1. 2019 Australian Pets Ownership Chart', 'pets2019')">
+                            2019
+                        </button>
+                        <button id="btn2021" class="btn btn-primary btn-custom-2021" onclick="show('pets-ownership-2021.png', 'Fig 2. 2021 Australian Pets Ownership Chart', 'pets2021')">
+                            2021
+                        </button>
+                        <button id="btnBoth" class="btn btn-primary btn-custom-both" onclick="show('Pets-Data-Difference-2019-and-2021.png', 'Fig 3. 2019 and 2021 Differences of Australian Pets Ownership Chart', 'pets2019and2021')">
+                            Both
+                        </button>
+                    </div>
+                </section>
+                <section class="text-center mb-4">
+                    <svg width="auto" height="350" style="background-color: slategrey;">
+                        <!-- Y-Axis -->
+                        <!-- <line x1="50" y1="20" x2="50" y2="280" stroke="black" stroke-width="2"/> -->
+                        
+                        <!-- X-Axis -->
+                        <!-- <line x1="50" y1="280" x2="450" y2="280" stroke="black" stroke-width="2"/> -->
+                        
+                        <!-- Bars for 2019 -->
+                        <!-- Dogs --><rect x="70" y="100" width="65" height="140" fill="cornflowerblue"/>
+                        <!-- Cats --><rect x="140" y="150" width="65" height="90" fill="cornflowerblue"/>
+                        <!-- Fish --><rect x="210" y="200" width="65" height="40" fill="cornflowerblue"/>
+                        <!-- Birds --><rect x="280" y="208" width="65" height="32" fill="cornflowerblue"/>
+                        <!-- Small M --><rect x="350" y="228" width="65" height="12" fill="cornflowerblue"/>
+                        <!-- Reptiles --><rect x="420" y="232" width="65" height="8" fill="cornflowerblue"/>
+                        <!-- Other Pets --><rect x="490" y="232" width="65" height="8" fill="cornflowerblue"/>
+                        
+                        <!-- Labels for X-Axis (Animals) -->
+                        <text x="85" y="260" fill="black">Dogs</text>
+                        <text x="155" y="260" fill="black">Cats</text>
+                        <text x="225" y="260" fill="black">Fish</text>
+                        <text x="295" y="260" fill="black">Birds</text>
+                        <text x="355" y="260" fill="black">Small M</text>
+                        <text x="425" y="260" fill="black">Reptiles</text>
+                        <text x="490" y="260" fill="black">Other Pets</text>
+                        
+                        <!-- Labels for Y-Axis -->
+                        <!-- <text x="25" y="150" fill="black">40</text>
+                        <text x="25" y="200" fill="black">20</text>
+                        <text x="25" y="250" fill="black">10</text>
+                        <text x="25" y="280" fill="black">0</text> -->
+                    </svg>
+
+                    <svg width="auto" height="350" style="background-color: slategrey;">
+                        <!-- Y-Axis -->
+                        <!-- <line x1="50" y1="20" x2="50" y2="280" stroke="black" stroke-width="2"/> -->
+                        
+                        <!-- X-Axis -->
+                        <!-- <line x1="50" y1="280" x2="450" y2="280" stroke="black" stroke-width="2"/> -->
+                        
+                        <!-- Bars for 2021 -->
+                        <rect x="70" y="126" width="65" height="154" fill="#ffc107"/>
+                        <rect x="140" y="176" width="65" height="104" fill="#ffc107"/>
+                        <rect x="210" y="236" width="65" height="44" fill="#ffc107"/>
+                        <rect x="280" y="208" width="65" height="72" fill="#ffc107"/>
+                        <rect x="350" y="248" width="65" height="32" fill="#ffc107"/>
+                        <rect x="420" y="256" width="65" height="24" fill="#ffc107"/>
+                        <rect x="490" y="276" width="65" height="4" fill="#ffc107"/>
+                        
+                        <!-- Labels for X-Axis (Animals) -->
+                        <text x="85" y="300" fill="black">Dogs</text>
+                        <text x="155" y="300" fill="black">Cats</text>
+                        <text x="225" y="300" fill="black">Fish</text>
+                        <text x="295" y="300" fill="black">Birds</text>
+                        <text x="365" y="300" fill="black">Small M</text>
+                        <text x="435" y="300" fill="black">Reptiles</text>
+                        <text x="505" y="300" fill="black">Other Pets</text>
+                        
+                        <!-- Labels for Y-Axis -->
+                        <!-- <text x="25" y="150" fill="black">40</text>
+                        <text x="25" y="200" fill="black">20</text>
+                        <text x="25" y="250" fill="black">10</text>
+                        <text x="25" y="280" fill="black">0</text> -->
+                      </svg>
+                      <svg width="600" height="300" style="background-color: slategrey;">
+                        <!-- Y-Axis -->
+                        <line x1="50" y1="20" x2="50" y2="280" stroke="black" stroke-width="2"/>
+                        
+                        <!-- X-Axis -->
+                        <line x1="50" y1="280" x2="550" y2="280" stroke="black" stroke-width="2"/>
+                        
+                        <!-- Bars for 2019 -->
+                        <rect x="70" y="140" width="30" height="140" fill="cornflowerblue"/>
+                        <rect x="130" y="190" width="30" height="90" fill="cornflowerblue"/>
+                        <rect x="190" y="240" width="30" height="40" fill="cornflowerblue"/>
+                        <rect x="250" y="248" width="30" height="32" fill="cornflowerblue"/>
+                        <rect x="310" y="268" width="30" height="12" fill="cornflowerblue"/>
+                        <rect x="370" y="272" width="30" height="8" fill="cornflowerblue"/>
+                        <rect x="430" y="272" width="30" height="8" fill="cornflowerblue"/>
+                        
+                        <!-- Bars for 2021 -->
+                        <rect x="90" y="126" width="30" height="154" fill="rgb(100,149,237)"/>
+                        <rect x="150" y="176" width="30" height="104" fill="rgb(100,149,237)"/>
+                        <rect x="210" y="236" width="30" height="44" fill="rgb(100,149,237)"/>
+                        <rect x="270" y="208" width="30" height="72" fill="rgb(100,149,237)"/>
+                        <rect x="330" y="248" width="30" height="32" fill="rgb(100,149,237)"/>
+                        <rect x="390" y="256" width="30" height="24" fill="rgb(100,149,237)"/>
+                        <rect x="450" y="276" width="30" height="4" fill="rgb(100,149,237)"/>
+                      
+                        <!-- Labels for X-Axis (Animals) -->
+                        <text x="75" y="300" fill="black">Dogs</text>
+                        <text x="135" y="300" fill="black">Cats</text>
+                        <text x="195" y="300" fill="black">Fish</text>
+                        <text x="255" y="300" fill="black">Birds</text>
+                        <text x="315" y="300" fill="black">Small M</text>
+                        <text x="375" y="300" fill="black">Reptiles</text>
+                        <text x="435" y="300" fill="black">Other Pets</text>
+                        
+                        <!-- Labels for Y-Axis -->
+                        <text x="25" y="150" fill="black">40</text>
+                        <text x="25" y="200" fill="black">20</text>
+                        <text x="25" y="250" fill="black">10</text>
+                        <text x="25" y="280" fill="black">0</text>
+                      </svg>
+                  
+                  
+                <div class="card-body text-center">
+                    <img id="ChartImg" class="img-fluid rounded mb-3" style="display:none;" alt="">
+                    <figcaption id="ChartCap" class="text-muted"></figcaption>
+                </div>
+            </section>
+                <p class="card-text text-justify">
+                    With the increase in pet ownership, the AMA is encouraging policymakers to consider the needs of companion animals and their owners when considering rental, strata, and body corporate regulations, as well as accepting animals in public places and transport.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+<footer class="text-center py-3 mt-4 bg-light">
+    COS30045 Data Visualisation (Mohamed Zaeem Bin Suzaizi)
+</footer>
+
+</html>
+
+
