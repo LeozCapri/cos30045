@@ -31,12 +31,9 @@ window.onload = function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const labExercises = [
-    {
-      title: "Lab 1.1: HTML and CSS Demo Page",
-      link: "zaeem-lab1/lab1-1.html",
-    },
-    { title: "Lab 1.2: JavaScript", link: "zaeem-lab1/lab1-2.html" },
-    { title: "Lab 1.3: Drawing SVGs", link: "zaeem-lab1/lab1-3.html" },
+    { title: "Lab 1.1: HTML and CSS Demo Page", link: "lab1-1.html"},
+    { title: "Lab 1.2: JavaScript", link: "lab1-2.html" },
+    { title: "Lab 1.3: Drawing SVGs", link: "lab1-3.html" },
     // Add more exercises as needed
   ];
 
