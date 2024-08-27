@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data Visualisation Exercise 1" />
+    <meta name="keywords" content="HTML, CSS" />
+    <meta name="author" content="Mohamed Zaeem Bin Suzaizi" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../script.js"></script>
+
+    <title>COS30045 Task 2.2 D3 Drawing with Data - Bar Chart</title>
+</head>
+<body>
+
+<div class="container my-5">
+    <div class="card mx-auto" style="max-width: 800px;">
+        <div class="card-header">
+            <h1 class="card-title">Drawing Shapes with SVG</h1>
+            <svg width="500" height="58" style="background-color: slategrey;">
+                <g transform="translate(20,4)">
+                    <circle cx="25" cy="25" r="25" fill="cornflowerblue"/>
+                    <rect x="50" y="0" width="50" height="50" fill="rgb(100,149,237)"/>
+                    <ellipse cx="140" cy="25" rx="40" ry="25" fill="rgba(100,149,237,0.5)"/>
+                    <line x1="0" y1="30" x2="180" y2="30" stroke="black" stroke-width="5"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="card-header">
+            <h1 class="card-title">Pet ownership during the COVID pandemic has increased</h1>
+            <h4 class="card-subtitle mb-2 text-muted">Mohamed Zaeem Bin Suzaizi</h4>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-justify">
+                A report from <b>Animal Medicines Australia (AMA)</b> has found that many Australians took the opportunity to introduce a pet into their household during the pandemic. Their survey indicated that there was a significant increase in the percent of households taking in a new dog, fish, or bird. Their research also indicated that pets had a number of positive influences on their lives such as:
+            </p>
+            <ul class="list-unstyled">
+                <li>&#8226; Companionship</li>
+                <li>&#8226; Better mental health</li>
+                <li>&#8226; Joy and happiness</li>
+            </ul>
+            <section class="text-center mb-4">
+                <div class="btn-group" role="group" aria-label="Chart selection">
+                    <button id="btn2019" class="btn btn-primary">2019</button>
+                    <button id="btn2021" class="btn btn-primary">2021</button>
+                    <button id="btnBoth" class="btn btn-primary">Both</button>
+                </div>
+            </section>
+            <div class="card-body text-center">
+                <div id="chart2019" class="img-fluid rounded mb-3" style="display:none;"></div>
+                <div id="chart2021" class="img-fluid rounded mb-3" style="display:none;"></div>
+                <div id="chartComparison" class="img-fluid rounded mb-3" style="display:none;"></div>
+                <figcaption id="ChartCap" class="text-muted"></figcaption>
+            </div>
+
+            <p class="card-text text-justify">
+                With the increase in pet ownership, the AMA is encouraging policymakers to consider the needs of companion animals and their owners when considering rental, strata, and body corporate regulations, as well as accepting animals in public places and transport.
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    // Function to create a bar chart
+    function createBarChart(data, chartId, yearKey) {
+        var w = 500, h = 200;
+        var svg = d3.select(chartId).append("svg").attr("width", w).attr("height", h);
+
+        var colorScale = d3.scaleThreshold()
+            .domain([10, 20, 30])
+            .range(["#b3cde0", "#6497b1", "#003f5c"]);
+
+        var barWidth = w / data.length;
+
+        svg.selectAll("rect")
+            .data(data)
+            .enter().append("rect")
+            .attr("x", (d, i) => i * barWidth)
+            .attr("y", d => h - (d[yearKey] * 4))
+            .attr("width", barWidth - 1)
+            .attr("height", d => d[yearKey] * 4)
+            .attr("fill", d => colorScale(d[yearKey]));
+
+        svg.selectAll("text.label")
+            .data(data)
+            .enter().append("text")
+            .text(d => d.animal)
+            .attr("x", (d, i) => i * barWidth + (barWidth / 2))
+            .attr("y", h +10)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("fill", "black");
+
+        svg.selectAll("text.value")
+            .data(data)
+            .enter().append("text")
+            .text(d => d[yearKey])
+            .attr("x", (d, i) => i * barWidth + (barWidth / 2))
+            .attr("y", d => h - (d[yearKey] * 4) - 2)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("fill", "black");
+    }
+
+    // Function to create a comparison bar chart
+    function createComparisonChart(data) {
+        var w = 500, h = 200, barWidth = w / data.length / 2 - 1;
+
+        var svg = d3.select("#chartComparison").append("svg").attr("width", w).attr("height", h);
+
+        svg.selectAll(".bar2019")
+            .data(data)
+            .enter().append("rect")
+            .attr("x", (d, i) => i * (w / data.length))
+            .attr("y", d => h - (d.pets2019 * 4))
+            .attr("width", barWidth)
+            .attr("height", d => d.pets2019 * 4)
+            .attr("fill", "#6497b1");
+
+        svg.selectAll(".bar2021")
+            .data(data)
+            .enter().append("rect")
+            .attr("x", (d, i) => i * (w / data.length) + barWidth)
+            .attr("y", d => h - (d.pets2021 * 4))
+            .attr("width", barWidth)
+            .attr("height", d => d.pets2021 * 4)
+            .attr("fill", "#003f5c");
+
+        svg.selectAll("text.label")
+            .data(data)
+            .enter().append("text")
+            .text(d => d.animal)
+            .attr("x", (d, i) => i * (w / data.length) + (w / data.length) / 2)
+            .attr("y", h - 5)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("fill", "black");
+
+        svg.selectAll("text.value")
+            .data(data)
+            .enter().append("text")
+            .text(d => `${d.pets2019} / ${d.pets2021}`)
+            .attr("x", (d, i) => i * (w / data.length) + (w / data.length) / 2)
+            .attr("y", d => h - Math.max(d.pets2019, d.pets2021) * 4 - 2)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("fill", "black");
+    }
+
+    // Function to show/hide charts
+    function showChart(chartId, caption) {
+        ["#chart2019", "#chart2021", "#chartComparison"].forEach(id => {
+            document.querySelector(id).style.display = "none";
+        });
+        document.querySelector(chartId).style.display = "block";
+        document.querySelector("#ChartCap").textContent = caption;
+    }
+
+    // Initialize the charts
+    function init() {
+        d3.csv("pet_ownership.csv").then(function(data) {
+            data.forEach(d => {
+                d.pets2019 = +d.pets2019;
+                d.pets2021 = +d.pets2021;
+            });
+
+            createBarChart(data, "#chart2019", "pets2019");
+            createBarChart(data, "#chart2021", "pets2021");
+            createComparisonChart(data);
+
+            // Show the 2019 chart by default
+            showChart("#chart2019", "Fig 1. 2019 Australian Pets Ownership Chart");
+
+            // Add event listeners to buttons
+            document.querySelector("#btn2019").addEventListener("click", () => showChart("#chart2019", "Fig 1. 2019 Australian Pets Ownership Chart"));
+            document.querySelector("#btn2021").addEventListener("click", () => showChart("#chart2021", "Fig 2. 2021 Australian Pets Ownership Chart"));
+            document.querySelector("#btnBoth").addEventListener("click", () => showChart("#chartComparison", "Fig 3. 2019 and 2021 Differences of Australian Pets Ownership Chart"));
+        });
+    }
+
+    // Run the init function on window load
+    window.onload = init;
+</script>
+
+</body>
+</html>

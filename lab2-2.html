@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Metadata about the HTML document -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data Visualisation Exercise 1" />
+    <meta name="keywords" content="HTML, CSS" />
+    <meta name="author" content="Mohamed Zaeem Bin Suzaizi" />
+
+    <!-- Linking Bootstrap CSS for styling -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- Including D3.js library from a CDN for data visualization -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Linking custom styles and scripts -->
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../script.js" defer></script>
+
+    <!-- Title of the document -->
+    <title>COS30045 Task 2.2 D3 Drawing with Data - Bar Chart</title>
+  </head>
+
+  <body>
+    <header class="text-center my-4">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <!-- Logo column with image -->
+          <div class="col-auto">
+            <img
+              src="initial-logo.png"
+              alt="Logo"
+              class="img-fluid"
+              style="max-width: 100px"
+            />
+          </div>
+          <!-- Column with author name and emails -->
+          <div class="col-auto">
+            <p class="mb-0 header-bio">
+              <b>MOHAMED ZAEEM BIN SUZAIZI</b>
+              <br />
+              INTI: J24042991@student.newinti.edu.my
+              <br />
+              SUT: 105095593@student.swin.edu.au
+            </p>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="mt-4">
+          <!-- For working git -->
+          <!-- <a href="/cos30045/index.html" class="btn btn-outline-primary mx-2">Home</a>
+                <a href="/cos30045/lab1-1.html" class="btn btn-outline-secondary mx-2">Lab 1-1</a>
+                <a href="/cos30045/lab1-2.html" class="btn btn-outline-secondary mx-2">Lab 1-2</a>
+                <a href="/cos30045/lab1-3.html" class="btn btn-outline-secondary mx-2">Lab 1-3</a> -->
+
+          <!-- Navigation buttons for different labs -->
+          <a href="/index.html" class="btn btn-outline-primary mx-2">Home</a>
+          <a href="/lab2-1.html" class="btn btn-outline-secondary mx-2">Lab 2-1</a>
+          <a href="/lab2-2.html" class="btn btn-outline-secondary mx-2">Lab 2-2</a>
+          <a href="/lab2-3.html" class="btn btn-outline-secondary mx-2">Lab 2-3</a>
+          <a href="/lab2-4.html" class="btn btn-outline-secondary mx-2">Lab 2-4</a>
+
+          <!-- More buttons can be added for additional labs -->
+        </div>
+      </div>
+    </header>
+
+    <div class="container my-5">
+      <div class="card mx-auto">
+        <div class="card-header">
+          <h1 class="card-title" style="text-align: center">
+            Drawing with Data
+          </h1>
+        </div>
+        <div
+          class="card-body"
+          style="justify-content: center; text-align: center"
+        >
+          <!-- SVG will be appended here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var w = 500;
+      var h = 200;
+      var dataset = [14, 5, 26, 23, 9, 56, 15, 49, 80];
+      var padding = 1;
+
+      var svg = d3
+        .select("body")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+
+      svg
+        .selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("x", function (d, i) {
+          return i * (w / dataset.length);
+        })
+        // Adjust y attribute so bars grow upwards
+        .attr("y", function (d) {
+          return h - d * 4; // Subtract from total height
+        })
+        .attr("width", function (d) {
+          return w / dataset.length - padding;
+        })
+        .attr("height", function (d) {
+          return d * 4;
+        })
+        .attr("fill", function (d) {
+          if (d > 10) {
+            return "red";
+          } else {
+            return "black"; // Provide default fill color for bars
+          }
+        });
+
+      svg
+        .selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .text(function (d) {
+          return d;
+        })
+        .attr("fill", "black")
+        .attr("x", function (d, i) {
+          return i * (w / dataset.length) + 16;
+        })
+        .attr("y", function (d) {
+          return h - d * 4 - 2; // Adjust y to position text above bars
+        });
+    </script>
+  </body>
+  <footer class="text-center py-3 mt-4 bg-light">
+    COS30045 Data Visualisation (Mohamed Zaeem Bin Suzaizi)
+  </footer>
+</html>
+
+<!-- <script>
+                var w = 500;
+                var h = 100;
+    
+                var dataset = [14, 5, 26, 23, 9];
+    
+                var svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+    
+                svg.selectAll("rect")
+                  .data(dataset)
+                  .enter().append("rect")
+                  .attr("x", 0)
+                  .attr("y", 0)
+                  .attr("width", 20)
+                  .attr("height", 100);
+              </script> -->
+<!-- <script>
+                var w = 500;
+                var h = 100;
+    
+                var dataset = [14, 5, 26, 23, 9];
+    
+                var svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+    
+                svg.selectAll("rect")
+                  .data(dataset)
+                  .enter().append("rect")
+                  .attr("x",function(d,i) {
+                    return i*20;
+                  })
+                  .attr("y", 0)
+                  .attr("width", 20)
+                  .attr("height", 100);
+              </script>
+            <script>
+                var w = 500;
+                var h = 100;
+    
+                var dataset = [14, 5, 26, 23, 9];
+    
+                var svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+    
+                svg.selectAll("rect")
+                  .data(dataset)
+                  .enter().append("rect")
+                  .attr("x",function(d,i) {
+                    return i*21;
+                  })
+                  .attr("y", 50)
+                  .attr("width", 20)
+                  .attr("height", 100);
+              </script>
+            <script>
+                var w = 500;
+                var h = 100;
+    
+                var dataset = [14, 5, 26, 23, 9];
+    
+                var svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+    
+                svg.selectAll("rect")
+                  .data(dataset)
+                  .enter().append("rect")
+                  .attr("x",function(d,i) {
+                    return i* (w/dataset.length);
+                  })
+                  .attr("y", 0)
+                  .attr("width", 20)
+                  .attr("height", 100);
+              </script> -->
+<!-- <script>
+                var w = 500;
+                var h = 350;
+              
+                var dataset = [14, 5, 26, 23, 9, 56, 15, 49, 70];
+                var padding = 1;
+              
+                // Select the card-body element instead of body
+                var svg = d3
+                  .select(".card-body") // Target the card-body class
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+              
+                svg
+                  .selectAll("rect")
+                  .data(dataset)
+                  .enter()
+                  .append("rect")
+                  .attr("fill", function (d) {
+                    // Change style to attr fill for rectangles
+                    return d > 10 ? "red" : "black"; // Use ternary operator for simplicity
+                  })
+                  .attr("x", function (d, i) {
+                    return i * (w / dataset.length);
+                  })
+                  .attr("y", function (d) {
+                    return h - d * 4; // Subtract from total height
+                  })
+                  .attr("width", function (d) {
+                    return w / dataset.length - padding;
+                  })
+                  .attr("height", function (d) {
+                    return d * 4;
+                  });
+              
+                svg
+                  .selectAll("text")
+                  .data(dataset)
+                  .enter()
+                  .append("text")
+                  .text(function (d) {
+                    return d;
+                  })
+                  .attr("fill", "grey")
+                  .attr("x", function (d, i) {
+                    return i * (w / dataset.length) + 18;
+                  })
+                  .attr("y", function (d) {
+                    return h - d * 4.5; // Adjusted for text placement above the bar
+                  });
+              </script> -->

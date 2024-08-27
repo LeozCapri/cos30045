@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data Visualisation Exercise 1" />
+    <meta name="keywords" content="HTML, CSS" />
+    <meta name="author" content="Mohamed Zaeem Bin Suzaizi" />
+
+    <!-- Bootstrap CSS for styling -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- D3.js library for data visualization -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Link to external stylesheet and JavaScript file -->
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" defer></script>
+
+    <title>COS30045 Task 2.3 D3 Drawing with Data - Scatter Plot</title>
+  </head>
+
+  <body>
+    <header class="text-center my-4">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <!-- Column for Logo -->
+          <div class="col-auto">
+            <img
+              src="initial-logo.png"
+              alt="Logo"
+              class="img-fluid"
+              style="max-width: 100px"
+            />
+          </div>
+          <!-- Column for Name and Email -->
+          <div class="col-auto">
+            <p class="mb-0 header-bio">
+              <b>MOHAMED ZAEEM BIN SUZAIZI</b>
+              <br />
+              INTI: J24042991@student.newinti.edu.my
+              <br />
+              SUT: 105095593@student.swin.edu.au
+            </p>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="mt-4">
+          <!-- For working git -->
+          <!-- <a href="/cos30045/index.html" class="btn btn-outline-primary mx-2">Home</a>
+                <a href="/cos30045/lab1-1.html" class="btn btn-outline-secondary mx-2">Lab 1-1</a>
+                <a href="/cos30045/lab1-2.html" class="btn btn-outline-secondary mx-2">Lab 1-2</a>
+                <a href="/cos30045/lab1-3.html" class="btn btn-outline-secondary mx-2">Lab 1-3</a> -->
+
+         <!-- Navigation buttons for different labs -->
+         <a href="/index.html" class="btn btn-outline-primary mx-2">Home</a>
+         <a href="/lab2-1.html" class="btn btn-outline-secondary mx-2">Lab 2-1</a>
+         <a href="/lab2-2.html" class="btn btn-outline-secondary mx-2">Lab 2-2</a>
+         <a href="/lab2-3.html" class="btn btn-outline-secondary mx-2">Lab 2-3</a>
+         <a href="/lab2-4.html" class="btn btn-outline-secondary mx-2">Lab 2-4</a>
+
+          
+          <!-- Add more buttons as needed for other labs -->
+        </div>
+      </div>
+    </header>
+      <!-- Main container for the scatter plot visualization -->
+      <div class="container my-5">
+        <div class="card mx-auto">
+          <div class="card-header">
+            <!-- Title of the scatter plot -->
+            <h1 class="card-title" style="text-align: center">Drawing with Data</h1>
+          </div>
+          <div class="card-body">
+              <p id="drawing-with-data" style=" text-align: center;"></p>
+              <script>
+                  // JavaScript code for creating a scatter plot using D3.js
+  
+                  // Set the width and height for the SVG container
+                  var w = 800;
+                  var h = 200;
+      
+                  // Dataset with three values for each data point: x-coordinate, y-coordinate, and radius size
+                  var dataset = [
+                    [5, 20, 10],    // Point with x=5, y=20, radius=10
+                    [480, 90, 20],  // Point with x=480, y=90, radius=20
+                    [250, 50, 5],   // Point with x=250, y=50, radius=5
+                    [100, 33, 15],  // Point with x=100, y=33, radius=15
+                    [330, 95, 25],  // Point with x=330, y=95, radius=25
+                    [410, 12, 8],   // Point with x=410, y=12, radius=8
+                    [475, 44, 18],  // Point with x=475, y=44, radius=18
+                    [25, 67, 12],   // Point with x=25, y=67, radius=12
+                    [85, 21, 22],   // Point with x=85, y=21, radius=22
+                  ];
+  
+                  // Create an SVG element inside the card-body div
+                  var svg = d3.select("#drawing-with-data")
+                    .append("svg")
+                    .attr("width", w)   // Set width of SVG
+                    .attr("height", h) // Set height of SVG
+  
+                  // Create circles for each data point in the dataset
+                  svg.selectAll("circle")
+                    .data(dataset)   // Bind dataset to circle elements
+                    .enter()         // Create a placeholder for each missing element
+                    .append("circle") // Append a circle element for each data point
+                    .attr("cx", function(d) {
+                      return d[0];   // Set x-coordinate (cx) using the first value in each data point
+                    })
+                    .attr("cy", function(d) {
+                      return d[1];   // Set y-coordinate (cy) using the second value in each data point
+                    })
+                    .attr("r", function(d) {
+                      return d[2];   // Set radius (r) using the third value in each data point
+                    })
+                    .attr("fill", "slategray");  // Set fill color of circles
+  
+                  // Create text labels for each data point to display x and y values
+                  svg.selectAll("text")
+                    .data(dataset)   // Bind dataset to text elements
+                    .enter()         // Create a placeholder for each missing element
+                    .append("text")  // Append a text element for each data point
+                    .text(function(d) {
+                      return d[0] + "," + d[1] +"," +d[2]; // Set text content to display x and y values
+                    })
+                    .attr("x", function(d) {
+                      return d[0] + 10; // Set x-coordinate for text slightly offset from the circle
+                    })
+                    .attr("y", function(d) {
+                      return d[1];     // Set y-coordinate for text aligned with the circle
+                    });
+              </script>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Footer section with course information -->
+      <footer class="text-center py-3 mt-4 bg-light">
+        COS30045 Data Visualisation (Mohamed Zaeem Bin Suzaizi)
+      </footer>
+    </body>
+  </html>

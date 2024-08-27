@@ -19,6 +19,27 @@ function show(Image, ImgDesc, ImgAlt) {
   }
 }
 
+// function show1(Image, ImgDesc, ImgAlt) {
+//   document.getElementById("ChartImg").src = Image;
+//   document.getElementById("ChartImg").alt = ImgAlt;
+//   document.getElementById("ChartCap").innerHTML = ImgDesc;
+//   document.getElementById("ChartImg").style.display = "block";
+
+//   // Remove active class from all buttons
+//   document.getElementById("btn2019").classList.remove("btn-custom-active");
+//   document.getElementById("btn2021").classList.remove("btn-custom-active");
+//   document.getElementById("btnBoth").classList.remove("btn-custom-active");
+
+//   // Add active class to the correct button
+//   if (ImgAlt === "pets2019") {
+//     document.getElementById("btn2019").classList.add("btn-custom-active");
+//   } else if (ImgAlt === "chart2021") {
+//     document.getElementById("btn2021").classList.add("btn-custom-active");
+//   } else if (ImgAlt === "chartComparison") {
+//     document.getElementById("btnBoth").classList.add("btn-custom-active");
+//   }
+// }
+
 // Load default chart
 window.onload = function () {
   show(
@@ -34,6 +55,10 @@ document.addEventListener("DOMContentLoaded", function () {
     { title: "Lab 1.1: HTML and CSS Demo Page", link: "lab1-1.html"},
     { title: "Lab 1.2: JavaScript", link: "lab1-2.html" },
     { title: "Lab 1.3: Drawing SVGs", link: "lab1-3.html" },
+    { title: "LAB 2.1 D3 Drawing with Data - Binding", link: "lab2-1.html" },
+    { title: "LAB 2.2 D3 Drawing with Data - Bar Chart", link: "lab2-2.html" },
+    { title: "LAB 2.3 D3 Drawing with Data - Scatter Plot", link: "lab2-3.html" },
+    { title: "LAB 2.4 D3 Loading Data from CSV", link: "lab2-4.html" },
     // Add more exercises as needed
   ];
 
