@@ -104,51 +104,99 @@
             .attr("font-size", "12px")
             .attr("fill", "black");
     }
+// Function to create a comparison bar chart with labels and a legend
+function createComparisonChart(data) {
+    var w = 500,
+        h = 350, // Increased height to make room for labels and legend
+        barWidth = w / data.length / 2 - 1;
 
-    // Function to create a comparison bar chart
-    function createComparisonChart(data) {
-        var w = 500, h = 200, barWidth = w / data.length / 2 - 1;
+    // Create SVG container
+    var svg = d3.select("#chartComparison")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h);
 
-        var svg = d3.select("#chartComparison").append("svg").attr("width", w).attr("height", h);
+    // Add bars for 2019
+    svg.selectAll(".bar2019")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", (d, i) => i * (w / data.length))
+        .attr("y", d => h - 100 - (d.pets2019 * 4)) // Adjusted y position for 2019 bars
+        .attr("width", barWidth)
+        .attr("height", d => d.pets2019 * 4)
+        .attr("fill", "#6497b1");
 
-        svg.selectAll(".bar2019")
-            .data(data)
-            .enter().append("rect")
-            .attr("x", (d, i) => i * (w / data.length))
-            .attr("y", d => h - (d.pets2019 * 4))
-            .attr("width", barWidth)
-            .attr("height", d => d.pets2019 * 4)
-            .attr("fill", "#6497b1");
+    // Add bars for 2021
+    svg.selectAll(".bar2021")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", (d, i) => i * (w / data.length) + barWidth)
+        .attr("y", d => h - 100 - (d.pets2021 * 4)) // Adjusted y position for 2021 bars
+        .attr("width", barWidth)
+        .attr("height", d => d.pets2021 * 4)
+        .attr("fill", "#003f5c");
 
-        svg.selectAll(".bar2021")
-            .data(data)
-            .enter().append("rect")
-            .attr("x", (d, i) => i * (w / data.length) + barWidth)
-            .attr("y", d => h - (d.pets2021 * 4))
-            .attr("width", barWidth)
-            .attr("height", d => d.pets2021 * 4)
-            .attr("fill", "#003f5c");
+    // Add labels for each animal under the bars
+    svg.selectAll("text.label")
+        .data(data)
+        .enter()
+        .append("text")
+        .text(d => d.animal)
+        .attr("x", (d, i) => i * (w / data.length) + (w / data.length) / 2)
+        .attr("y", h - 40) // Position labels below the bars
+        .attr("text-anchor", "middle")
+        .attr("font-size", "12px")
+        .attr("fill", "black");
 
-        svg.selectAll("text.label")
-            .data(data)
-            .enter().append("text")
-            .text(d => d.animal)
-            .attr("x", (d, i) => i * (w / data.length) + (w / data.length) / 2)
-            .attr("y", h - 5)
-            .attr("text-anchor", "middle")
-            .attr("font-size", "12px")
-            .attr("fill", "black");
+    // Add values above each bar group
+    svg.selectAll("text.value")
+        .data(data)
+        .enter()
+        .append("text")
+        .text(d => `${d.pets2019} / ${d.pets2021}`)
+        .attr("x", (d, i) => i * (w / data.length) + (w / data.length) / 2)
+        .attr("y", d => h - 100 - Math.max(d.pets2019, d.pets2021) * 4 - 5) // Adjusted y position for values
+        .attr("text-anchor", "middle")
+        .attr("font-size", "12px")
+        .attr("fill", "black");
 
-        svg.selectAll("text.value")
-            .data(data)
-            .enter().append("text")
-            .text(d => `${d.pets2019} / ${d.pets2021}`)
-            .attr("x", (d, i) => i * (w / data.length) + (w / data.length) / 2)
-            .attr("y", d => h - Math.max(d.pets2019, d.pets2021) * 4 - 2)
-            .attr("text-anchor", "middle")
-            .attr("font-size", "12px")
-            .attr("fill", "black");
-    }
+    // Add legend for color labels
+    var legend = svg.append("g")
+                    .attr("class", "legend")
+                    .attr("transform", `translate(${w / 2 - 50}, ${h - 30})`); // Position legend
+
+    // Legend for 2019
+    legend.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", 20)
+          .attr("height", 20)
+          .attr("fill", "#6497b1");
+
+    legend.append("text")
+          .attr("x", 25)
+          .attr("y", 15)
+          .text("2019")
+          .attr("font-size", "12px")
+          .attr("fill", "black");
+
+    // Legend for 2021
+    legend.append("rect")
+          .attr("x", 80)
+          .attr("y", 0)
+          .attr("width", 20)
+          .attr("height", 20)
+          .attr("fill", "#003f5c");
+
+    legend.append("text")
+          .attr("x", 105)
+          .attr("y", 15)
+          .text("2021")
+          .attr("font-size", "12px")
+          .attr("fill", "black");
+}
 
     // Function to show/hide charts
     function showChart(chartId, caption) {

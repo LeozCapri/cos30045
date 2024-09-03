@@ -21,7 +21,7 @@
 
     <!-- Linking custom styles and scripts -->
     <link rel="stylesheet" href="../styles.css" />
-    <script src="../script.js" defer></script>
+    <script src="../script.js" ></script>
 
     <!-- Title of the document -->
     <title>COS30045 Task 2.2 D3 Drawing with Data - Bar Chart</title>
@@ -90,12 +90,12 @@
 
     <script>
       var w = 500;
-      var h = 200;
+      var h = 350;
       var dataset = [14, 5, 26, 23, 9, 56, 15, 49, 80];
       var padding = 1;
 
       var svg = d3
-        .select("body")
+        .select(".card-body")
         .append("svg")
         .attr("width", w)
         .attr("height", h);
