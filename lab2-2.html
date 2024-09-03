@@ -78,6 +78,8 @@
           <h1 class="card-title" style="text-align: center">
             Drawing with Data
           </h1>
+          <p style="text-align: center;">Section C1: Show data value just under the top line of the bar</p>
+
         </div>
         <div
           class="card-body"
@@ -91,7 +93,7 @@
     <script>
       var w = 500;
       var h = 350;
-      var dataset = [14, 5, 26, 23, 9, 56, 15, 49, 80];
+      var dataset = [14, 6, 26, 23, 9, 56, 15, 49, 80];
       var padding = 1;
 
       var svg = d3
@@ -134,12 +136,12 @@
         .text(function (d) {
           return d;
         })
-        .attr("fill", "black")
+        .attr("fill", "WHITE")
         .attr("x", function (d, i) {
           return i * (w / dataset.length) + 16;
         })
         .attr("y", function (d) {
-          return h - d * 4 - 2; // Adjust y to position text above bars
+          return h - d * 4 + 15; // Adjust y to position text above bars
         });
     </script>
   </body>
@@ -148,137 +150,3 @@
   </footer>
 </html>
 
-<!-- <script>
-                var w = 500;
-                var h = 100;
-    
-                var dataset = [14, 5, 26, 23, 9];
-    
-                var svg = d3.select("body")
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
-    
-                svg.selectAll("rect")
-                  .data(dataset)
-                  .enter().append("rect")
-                  .attr("x", 0)
-                  .attr("y", 0)
-                  .attr("width", 20)
-                  .attr("height", 100);
-              </script> -->
-<!-- <script>
-                var w = 500;
-                var h = 100;
-    
-                var dataset = [14, 5, 26, 23, 9];
-    
-                var svg = d3.select("body")
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
-    
-                svg.selectAll("rect")
-                  .data(dataset)
-                  .enter().append("rect")
-                  .attr("x",function(d,i) {
-                    return i*20;
-                  })
-                  .attr("y", 0)
-                  .attr("width", 20)
-                  .attr("height", 100);
-              </script>
-            <script>
-                var w = 500;
-                var h = 100;
-    
-                var dataset = [14, 5, 26, 23, 9];
-    
-                var svg = d3.select("body")
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
-    
-                svg.selectAll("rect")
-                  .data(dataset)
-                  .enter().append("rect")
-                  .attr("x",function(d,i) {
-                    return i*21;
-                  })
-                  .attr("y", 50)
-                  .attr("width", 20)
-                  .attr("height", 100);
-              </script>
-            <script>
-                var w = 500;
-                var h = 100;
-    
-                var dataset = [14, 5, 26, 23, 9];
-    
-                var svg = d3.select("body")
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
-    
-                svg.selectAll("rect")
-                  .data(dataset)
-                  .enter().append("rect")
-                  .attr("x",function(d,i) {
-                    return i* (w/dataset.length);
-                  })
-                  .attr("y", 0)
-                  .attr("width", 20)
-                  .attr("height", 100);
-              </script> -->
-<!-- <script>
-                var w = 500;
-                var h = 350;
-              
-                var dataset = [14, 5, 26, 23, 9, 56, 15, 49, 70];
-                var padding = 1;
-              
-                // Select the card-body element instead of body
-                var svg = d3
-                  .select(".card-body") // Target the card-body class
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
-              
-                svg
-                  .selectAll("rect")
-                  .data(dataset)
-                  .enter()
-                  .append("rect")
-                  .attr("fill", function (d) {
-                    // Change style to attr fill for rectangles
-                    return d > 10 ? "red" : "black"; // Use ternary operator for simplicity
-                  })
-                  .attr("x", function (d, i) {
-                    return i * (w / dataset.length);
-                  })
-                  .attr("y", function (d) {
-                    return h - d * 4; // Subtract from total height
-                  })
-                  .attr("width", function (d) {
-                    return w / dataset.length - padding;
-                  })
-                  .attr("height", function (d) {
-                    return d * 4;
-                  });
-              
-                svg
-                  .selectAll("text")
-                  .data(dataset)
-                  .enter()
-                  .append("text")
-                  .text(function (d) {
-                    return d;
-                  })
-                  .attr("fill", "grey")
-                  .attr("x", function (d, i) {
-                    return i * (w / dataset.length) + 18;
-                  })
-                  .attr("y", function (d) {
-                    return h - d * 4.5; // Adjusted for text placement above the bar
-                  });
-              </script> -->
