@@ -56,7 +56,7 @@ function barChart(wombatSightings) {
 
 // Function to initialize the chart
 function init() {
-    d3.csv("Task_2.4_data.csv").then(function(data) {
+    d3.csv("../src/data/Task_2.4_data.csv").then(function(data) {
         console.log(data); // Log data to the console for debugging
 
         wombatSightings = data;

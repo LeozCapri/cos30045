@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles.css">
     <script src="../script.js" defer></script>
-    <title>COS30045 Task 1.3 Drawing SVGs </title>
+    <title>COS30045 LAB 1.1 HTML and CSS Review</title>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
                 <!-- Column for Logo -->
                 <div class="col-auto">
                     <img
-                        src="initial-logo.png"
+                        src="../src/img/initial-logo.png"
                         alt="Logo"
                         class="img-fluid"
                         style="max-width: 100px;"
@@ -37,7 +37,7 @@
                     </p>
                 </div>
             </div>
-            
+   
             <!-- Navigation Buttons -->
             <div class="mt-4">
                 <!-- For working git -->
@@ -47,29 +47,17 @@
                 <a href="/cos30045/lab1-3.html" class="btn btn-outline-secondary mx-2">Lab 1-3</a>
                  -->
                 <!-- For working server -->
-                <a href="index.html" class="btn btn-outline-primary mx-2">Home</a>
-                <a href="lab1-1.html" class="btn btn-outline-secondary mx-2">Lab 1-1</a>
-                <a href="lab1-2.html" class="btn btn-outline-secondary mx-2">Lab 1-2</a>
-                <a href="lab1-3.html" class="btn btn-outline-secondary mx-2">Lab 1-3</a>
+                <a href="../index.html" class="btn btn-outline-primary mx-2">Home</a>
+                <a href="../zaeem-lab1/lab1-1.html" class="btn btn-outline-secondary mx-2">Lab 1-1</a>
+                <a href="../zaeem-lab1/lab1-2.html" class="btn btn-outline-secondary mx-2">Lab 1-2</a>
+                <a href="../zaeem-lab1/lab1-3.html" class="btn btn-outline-secondary mx-2">Lab 1-3</a>
                 <!-- Add more buttons as needed for other labs -->
             </div>
         </div>
     </header>
+
     <div class="container my-5">
         <div class="card mx-auto" style="max-width: 800px;">
-            <div class="card-header">
-                <h1 class="card-title">Drawing Shapes with SVG</h1>
-                <svg width="500" height="58" style="background-color: slategrey;">
-                    <g transform="translate(20,4)">
-                        <!-- transform="translate(20,0)" -->
-                        <circle cx="25", cy="25", r="25" fill="cornflowerblue"/>
-                        <rect x="50", y="0", width="50", height="50" fill="rgb(100,149,237)"/>
-                        <ellipse cx="140" cy="25" rx="40" ry="25" fill="rgba(100,149,237,0.5)"/>
-                        <line x1="0" y1="30" x2="180" y2="30" stroke="black" stroke-width="5"/>
-                    </g>
-                </svg>
-            </div>
-            
             <div class="card-header">
                 <h1 class="card-title">Pet ownership during the COVID pandemic has increased</h1>
                 <h4 class="card-subtitle mb-2 text-muted">Mohamed Zaeem Bin Suzaizi</h2>
@@ -83,39 +71,30 @@
                     <li>&#8226; Better mental health</li>
                     <li>&#8226; Joy and happiness</li>
                 </ul>
-                <section class="text-center mb-4">
-                    <div class="btn-group" role="group" aria-label="Chart selection">
-                        <button id="btn2019" class="btn btn-primary btn-custom-2019" onclick="show('pets-ownership-2019.png', 'Fig 1. 2019 Australian Pets Ownership Chart', 'pets2019')">
-                            2019
-                        </button>
-                        <button id="btn2021" class="btn btn-primary btn-custom-2021" onclick="show('pets-ownership-2021.png', 'Fig 2. 2021 Australian Pets Ownership Chart', 'pets2021')">
-                            2021
-                        </button>
-                        <button id="btnBoth" class="btn btn-primary btn-custom-both" onclick="show('Pets-Data-Difference-2019-and-2021.png', 'Fig 3. 2019 and 2021 Differences of Australian Pets Ownership Chart', 'pets2019and2021')">
-                            Both
-                        </button>
-                    </div>
-                </section>
-                <section class="text-center mb-4">
-                  
-                  
-                <div class="card-body text-center">
-                    <img id="ChartImg" class="img-fluid rounded mb-3" style="display:none;" alt="">
-                    <figcaption id="ChartCap" class="text-muted"></figcaption>
-                </div>
-            </section>
+                <figure class="text-center">
+                    <img src="../src/img/pet_ownership_in_australia_table.png" alt="Pet Ownership Chart" class="img-fluid rounded mb-3">
+                    <figcaption class="blockquote-footer">
+                        Image source from <a href="https://animalmedicinesaustralia.org.au/wp-content/uploads/2021/08/AMAU005-PATP-Report21_v1.41_WEB.pdf" class="link-primary">Animal Medicines Australia</a>
+                    </figcaption>
+                </figure>
+                <p style="text-align: center;">Section C1: Add table containing pet pictures with appropriate label</p>
+                <table>
+                    <tr>
+                      <td><figure style="text-align: center;"><img src="/COS30045 1.1 Resources/cat.jpg" alt="" style="max-width: 80%;"><figcaption style="text-align: center;">Cat</figcaption></figure></td>    
+                      <td><figure style="text-align: center;"><img src="/COS30045 1.1 Resources/dog.png" alt="" style="max-width: 80%;"><figcaption style="text-align: center;">Dog</figcaption></figure></td>
+                      <td><figure style="text-align: center;"><img src="/COS30045 1.1 Resources/fish.jpg" alt="" style="max-width: 80%;"><figcaption style="text-align: center;">Fish</figcaption></figure></td>
+                    </tr>
+                  </table>
                 <p class="card-text text-justify">
                     With the increase in pet ownership, the AMA is encouraging policymakers to consider the needs of companion animals and their owners when considering rental, strata, and body corporate regulations, as well as accepting animals in public places and transport.
                 </p>
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <footer class="text-center py-3 mt-4 bg-light">
-    COS30045 Data Visualisation (Mohamed Zaeem Bin Suzaizi)
+	COS30045 Data Visualisation (Mohamed Zaeem Bin Suzaizi)
 </footer>
 
 </html>
-
-
