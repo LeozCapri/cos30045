@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data Visualisation Exercise 1" />
+    <meta name="keywords" content="HTML, CSS" />
+    <meta name="author" content="Mohamed Zaeem Bin Suzaizi" />
+
+    <!-- Bootstrap CSS for styling -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- D3.js library for data visualization -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Link to external stylesheet and JavaScript file -->
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../script.js" defer></script>
+
+    <title>COS30045 Task 3.1 D3 Scaling your Charts</title>
+  </head>
+
+  <body>
+    <header class="text-center my-4">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <!-- Column for Logo -->
+          <div class="col-auto">
+            <img
+              src="../src/img/initial-logo.png"
+              alt="Logo"
+              class="img-fluid"
+              style="max-width: 100px"
+            />
+          </div>
+          <!-- Column for Name and Email -->
+          <div class="col-auto">
+            <p class="mb-0 header-bio">
+              <b>MOHAMED ZAEEM BIN SUZAIZI</b>
+              <br />
+              INTI: J24042991@student.newinti.edu.my
+              <br />
+              SUT: 105095593@student.swin.edu.au
+            </p>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="mt-4">
+          <!-- For working git -->
+          <!-- <a href="/cos30045/index.html" class="btn btn-outline-primary mx-2">Home</a>
+                <a href="/cos30045/lab1-1.html" class="btn btn-outline-secondary mx-2">Lab 1-1</a>
+                <a href="/cos30045/lab1-2.html" class="btn btn-outline-secondary mx-2">Lab 1-2</a>
+                <a href="/cos30045/lab1-3.html" class="btn btn-outline-secondary mx-2">Lab 1-3</a> -->
+
+          <!-- Navigation buttons for different labs -->
+          <a href="../index.html" class="btn btn-outline-primary mx-2">Home</a>
+          <a
+            href="../zaeem-lab3/lab3-1.html"
+            class="btn btn-outline-secondary mx-2"
+            >Lab 3-1</a
+          >
+          <a
+            href="../zaeem-lab3/lab3-2.html"
+            class="btn btn-outline-secondary mx-2"
+            >Lab 3-2</a
+          >
+
+          <!-- Add more buttons as needed for other labs -->
+        </div>
+      </div>
+    </header>
+    <!-- Main container for the scatter plot visualization -->
+    <div class="container my-5">
+      <div class="card mx-auto">
+        <div class="card-header">
+          <!-- Title of the scatter plot -->
+          <h1 class="card-title" style="text-align: center">
+            Drawing with Data
+          </h1>
+        </div>
+        <div class="card-body">
+          <p id="drawing-with-data" style="text-align: center"></p>
+          <script>
+            // Set the width, height, and padding for the SVG container
+            var w = 800;
+            var h = 300;
+            var padding = 30;
+            var textPadding = 15; // Padding value for text labels
+
+            // Updated dataset with (500, 90) instead of (500, X)
+            var dataset = [
+              [5, 20],
+              [250, 50],
+              [100, 33],
+              [330, 95],
+              [410, 12],
+              [475, 44],
+              [25, 67],
+              [85, 21],
+              [500, 90], // Assuming X is meant to be 90 here
+            ];
+
+            // X scale (linear scaling for x values)
+            var xScale = d3
+              .scaleLinear()
+              .domain([
+                d3.min(dataset, function (d) {
+                  return d[0];
+                }),
+                d3.max(dataset, function (d) {
+                  return d[0];
+                }),
+              ])
+              .range([padding, w - padding]); // Adjust the range to include padding
+
+            // Y scale (reversing the Y values so higher values are at the top)
+            var yScale = d3
+              .scaleLinear()
+              .domain([
+                d3.min(dataset, function (d) {
+                  return d[1];
+                }),
+                d3.max(dataset, function (d) {
+                  return d[1];
+                }),
+              ])
+              .range([h - padding, padding]); // Reverse the range for Y axis
+
+            // Color scale for different x values
+            var colorScale = d3
+              .scaleLinear()
+              .domain([
+                d3.min(dataset, function (d) {
+                  return d[0];
+                }),
+                d3.max(dataset, function (d) {
+                  return d[0];
+                }),
+              ])
+              .range(["green", "blue"]); // Color gradient from green to blue for most points
+
+            // Create the SVG element inside the container
+            var svg = d3
+              .select("#drawing-with-data")
+              .append("svg")
+              .attr("width", w)
+              .attr("height", h);
+
+            // Create circles for each data point
+            svg
+              .selectAll("circle")
+              .data(dataset)
+              .enter()
+              .append("circle")
+              .attr("cx", function (d) {
+                return xScale(d[0]);
+              }) // X position
+              .attr("cy", function (d) {
+                return yScale(d[1]);
+              }) // Y position (reversed)
+              .attr("r", 5) // Radius of the circle
+              .attr("fill", function (d) {
+                if (d[0] === 500) return "red"; // Make the circle red if x is 500
+                return colorScale(d[0]); // Other points will have a gradient from green to blue
+              });
+
+            // Create text labels for each data point to display x and y values
+            svg
+              .selectAll("text")
+              .data(dataset)
+              .enter()
+              .append("text")
+              .text(function (d) {
+                return d[0] + "," + d[1];
+              }) // Text content: x and y values
+              .attr("x", function (d) {
+                return xScale(d[0]) + textPadding;
+              }) // X position with padding
+              .attr("y", function (d) {
+                return yScale(d[1]) - textPadding;
+              }) // Y position with padding (above the circle)
+              .attr("fill", function (d) {
+                if (d[0] === 500) return "red"; // Text color red for x = 500
+                return "black"; // Default text color
+              });
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer section with course information -->
+    <footer class="text-center py-3 mt-4 bg-light">
+      COS30045 Data Visualisation (Mohamed Zaeem Bin Suzaizi)
+    </footer>
+  </body>
+</html>
