@@ -1,0 +1,167 @@
+<!-- D3.js Scatter Plot Questions & Changes
+Question: Change the color of the scatter plot circles based on the age attribute of the data.
+
+Change: Modify the code to dynamically assign colors to circles based on age. -->
+
+<script>
+	svg.selectAll("circle")
+   .data(data)
+   .enter()
+   .append("circle")
+   .attr("cx", d => x(d.income))
+   .attr("cy", d => y(d.lifeExpectancy))
+   .attr("r", 5)
+   .style("fill", d => d.age > 50 ? "red" : "blue"); // Color based on age
+</script>
+
+<!-- Question: Add a legend to indicate the meaning of circle colors (e.g., red for age > 50, blue for age <= 50).
+
+Change: Add a basic legend below the scatter plot. -->
+
+<script>
+	svg.append("rect").attr("x", 20).attr("y", 350).attr("width", 15).attr("height", 15).style("fill", "red");
+svg.append("text").attr("x", 40).attr("y", 360).text("Age > 50").style("font-size", "12px").attr("alignment-baseline","middle");
+
+svg.append("rect").attr("x", 20).attr("y", 370).attr("width", 15).attr("height", 15).style("fill", "blue");
+svg.append("text").attr("x", 40).attr("y", 380).text("Age <= 50").style("font-size", "12px").attr("alignment-baseline","middle");
+</script>
+
+<!-- Question: Add tooltips to show the exact values of income, lifeExpectancy, and age when hovering over each circle.
+
+Change: Add a mouseover and mouseout event to display tooltips. -->
+
+<script>
+const tooltip = d3.select("body").append("div")
+    .style("position", "absolute")
+    .style("background", "lightgray")
+    .style("padding", "5px")
+    .style("border-radius", "5px")
+    .style("visibility", "hidden");
+
+svg.selectAll("circle")
+   .on("mouseover", (event, d) => {
+       tooltip.style("visibility", "visible")
+              .text(`Income: ${d.income}, Life Expectancy: ${d.lifeExpectancy}, Age: ${d.age}`);
+   })
+   .on("mousemove", (event) => {
+       tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
+   })
+   .on("mouseout", () => tooltip.style("visibility", "hidden"));
+</script>
+
+<!-- Question: Add X and Y gridlines to the scatter plot.
+
+Change: Add the gridlines to both axes. -->
+
+<script>
+	const xGridlines = d3.axisBottom(x).tickSize(-height).tickFormat("");
+svg.append("g")
+   .attr("class", "grid")
+   .attr("transform", `translate(0,${height})`)
+   .call(xGridlines);
+
+const yGridlines = d3.axisLeft(y).tickSize(-width).tickFormat("");
+svg.append("g")
+   .attr("class", "grid")
+   .call(yGridlines);
+</script>
+
+<!-- Question: Add axis labels for both the X and Y axes.
+
+Change: Add labels for the axes. -->
+
+<script>
+	svg.append("text")
+   .attr("x", width / 2)
+   .attr("y", height + 40)
+   .style("text-anchor", "middle")
+   .text("Income");
+
+svg.append("text")
+   .attr("x", -height / 2)
+   .attr("y", -40)
+   .attr("transform", "rotate(-90)")
+   .style("text-anchor", "middle")
+   .text("Life Expectancy");
+</script>
+
+<!-- Question: Add a zoom feature to allow users to zoom in and out of the scatter plot.
+
+Change: Implement a zoom behavior using d3.zoom. -->
+
+<script>
+	const zoom = d3.zoom()
+    .scaleExtent([0.5, 10])
+    .on("zoom", (event) => {
+        svg.attr("transform", event.transform);
+    });
+
+svg.call(zoom);
+</script>
+
+<!-- Question: Adjust the size of the circles based on the age of the data points.
+
+Change: Adjust the circle radius based on age. -->
+
+<script>
+svg.selectAll("circle")
+   .data(data)
+   .enter()
+   .append("circle")
+   .attr("cx", d => x(d.income))
+   .attr("cy", d => y(d.lifeExpectancy))
+   .attr("r", d => d.age / 10) // Circle size proportional to age
+   .style("fill", "steelblue");	
+</script>
+
+<!-- Question: Change the X and Y axes to use a logarithmic scale.
+
+Change: Use d3.scaleLog for both axes. -->
+
+<script>
+	const x = d3.scaleLog()
+            .domain([d3.min(data, d => d.income), d3.max(data, d => d.income)])
+            .range([0, width]);
+
+const y = d3.scaleLog()
+            .domain([d3.min(data, d => d.lifeExpectancy), d3.max(data, d => d.lifeExpectancy)])
+            .range([height, 0]);
+
+// Redraw axes with logarithmic scales
+svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x));
+svg.append("g").call(d3.axisLeft(y));
+</script>
+
+<!-- Question: Highlight data points that belong to a specific age group (e.g., age > 60).
+
+Change: Apply special styling to circles with age greater than 60. -->
+
+<script>
+svg.selectAll("circle")
+   .data(data)
+   .enter()
+   .append("circle")
+   .attr("cx", d => x(d.income))
+   .attr("cy", d => y(d.lifeExpectancy))
+   .attr("r", 5)
+   .style("fill", d => d.age > 60 ? "orange" : "steelblue"); // Highlight age > 60
+
+</script>
+
+<!-- Question: Animate the scatter plot, with circles gradually appearing one by one.
+
+Change: Add a transition effect for circle appearance. -->
+
+<script>
+svg.selectAll("circle")
+   .data(data)
+   .enter()
+   .append("circle")
+   .attr("cx", d => x(d.income))
+   .attr("cy", d => y(d.lifeExpectancy))
+   .attr("r", 0)
+   .style("fill", "steelblue")
+   .transition()
+   .duration(800)
+   .attr("r", 5); // Circle grows into view	
+</script>

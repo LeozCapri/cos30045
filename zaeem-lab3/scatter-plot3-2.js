@@ -6,15 +6,16 @@ var textPadding = 15; // Padding value for text labels
 
 // Updated dataset with (500, 90) instead of (500, X)
 var dataset = [
-  [5, 20],
-  [250, 50],
-  [100, 33],
-  [330, 95],
-  [410, 12],
-  [475, 44],
-  [25, 67],
-  [85, 21],
-  [500, 90], // Assuming X is meant to be 90 here
+  [2,8],
+  [3,5],
+  [5,17],
+  [6,6],
+  [6,12],
+  [7,20],
+  [8,22],
+  [10,11],
+  [5,12], // Assuming X is meant to be 90 here
+  [6,16], // Assuming X is meant to be 90 here
 ];
 
 // X scale (linear scaling for x values)
@@ -122,13 +123,13 @@ svg.append("g")
 // Add axis labels
 svg.append("text")
   .attr("x", w / 2)
-  .attr("y", h - 10)
+  .attr("y", h )
   .style("text-anchor", "middle")
   .text("X Axis");
 
 svg.append("text")
   .attr("x", -h / 2)
-  .attr("y", 0)
+  .attr("y", 10)
   .attr("transform", "rotate(-90)")
   .style("text-anchor", "middle")
   .text("Y Axis");
