@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { title: "LAB 2.3 D3 Drawing with Data - Scatter Plot", link: "/zaeem-lab2/lab2-3.html" },
     { title: "LAB 2.4 D3 Loading Data from CSV", link: "/zaeem-lab2/lab2-4.html" },
     { title: "LAB 3.1 D3 Scaling your Charts", link: "/zaeem-lab3/lab3-1.html" },
-    { title: "LAB 3.2 Adding Axis to your Charts", link: "/zaeem-lab3/lab3-2.html" },
+    { title: "LAB 3.2 Adding Axis to your Charts", link: "/zaeem-lab3/lab3-2.html" }
     // Add more exercises as needed
   ];
 
